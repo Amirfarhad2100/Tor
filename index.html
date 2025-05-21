@@ -592,7 +592,7 @@
                         <div class="price-input-wrapper">
                             <label class="form-label">نرخی تۆڕ</label>
                             <div class="input-group">
-                                <input type="number" id="screen-price" value="5" class="form-input" min="1">
+                                <input type="number" id="screen-price" value="5" class="form-input" min="1" step="0.1">
                                 <span class="input-prefix">$</span>
                             </div>
                         </div>
@@ -600,7 +600,7 @@
                         <div class="price-input-wrapper">
                             <label class="form-label">پەردە یەك دەرگا</label>
                             <div class="input-group">
-                                <input type="number" id="curtain-price-1" value="6.5" class="form-input" min="1">
+                                <input type="number" id="curtain-price-1" value="6.5" class="form-input" min="1" step="0.1">
                                 <span class="input-prefix">$</span>
                             </div>
                         </div>
@@ -608,7 +608,7 @@
                         <div class="price-input-wrapper">
                             <label class="form-label">پەردە دوو دەرگا</label>
                             <div class="input-group">
-                                <input type="number" id="curtain-price-2" value="7.5" class="form-input" min="1">
+                                <input type="number" id="curtain-price-2" value="7.5" class="form-input" min="1" step="0.1">
                                 <span class="input-prefix">$</span>
                             </div>
                         </div>
@@ -651,7 +651,7 @@
                                     <div class="form-group">
                                         <label class="form-label">بەرزی (سم)</label>
                                         <div class="input-group">
-                                            <input type="number"  class="form-input measurement-height">
+                                            <input type="number" step="0.1" class="form-input measurement-height">
                                             <span class="input-suffix">سم</span>
                                         </div>
                                     </div>
@@ -659,7 +659,7 @@
                                     <div class="form-group">
                                         <label class="form-label">پانی (سم)</label>
                                         <div class="input-group">
-                                            <input type="number"  class="form-input measurement-width">
+                                            <input type="number" step="0.1" class="form-input measurement-width">
                                             <span class="input-suffix">سم</span>
                                         </div>
                                     </div>
@@ -906,55 +906,55 @@
         
         // Initialize first measurement
         function initializeFirstMeasurement() {
-    const firstHeightInput = measurementsContainer.querySelector('.measurement-height');
-    const firstWidthInput = measurementsContainer.querySelector('.measurement-width');
-    
-    // زیادکردنی placeholder
-    firstHeightInput.placeholder = "بەرزی";
-    firstWidthInput.placeholder = "پانی";
-    
-    firstHeightInput.addEventListener('input', function() {
-        measurements[0].height = parseInt(this.value) || 0;
-        resetCalculation();
-    });
-    
-    firstWidthInput.addEventListener('input', function() {
-        measurements[0].width = parseInt(this.value) || 0;
-        resetCalculation();
-    });
-}
+            const firstHeightInput = measurementsContainer.querySelector('.measurement-height');
+            const firstWidthInput = measurementsContainer.querySelector('.measurement-width');
+            
+            // زیادکردنی placeholder
+            firstHeightInput.placeholder = "بەرزی";
+            firstWidthInput.placeholder = "پانی";
+            
+            firstHeightInput.addEventListener('input', function() {
+                measurements[0].height = parseFloat(this.value) || 0;
+                resetCalculation();
+            });
+            
+            firstWidthInput.addEventListener('input', function() {
+                measurements[0].width = parseFloat(this.value) || 0;
+                resetCalculation();
+            });
+        }
         
         // Add measurement button
         addMeasurementBtn.addEventListener('click', function() {
-    const newIndex = measurements.length;
-    measurements.push({ height: 0, width: 0 });
-    
-    const measurementDiv = document.createElement('div');
-    measurementDiv.className = 'measurement-container';
-    measurementDiv.innerHTML = `
-        <button class="remove-measurement" data-index="${newIndex}">
-            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-        </button>
-        <div class="grid-2">
-            <div class="form-group">
-                <label class="form-label">بەرزی </label>
-                <div class="input-group">
-                    <input type="number" placeholder="بەرزی" class="form-input measurement-height" data-index="${newIndex}">
-                    <span class="input-suffix">سم</span>
+            const newIndex = measurements.length;
+            measurements.push({ height: 0, width: 0 });
+            
+            const measurementDiv = document.createElement('div');
+            measurementDiv.className = 'measurement-container';
+            measurementDiv.innerHTML = `
+                <button class="remove-measurement" data-index="${newIndex}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label class="form-label">بەرزی </label>
+                        <div class="input-group">
+                            <input type="number" step="0.1" placeholder="بەرزی" class="form-input measurement-height" data-index="${newIndex}">
+                            <span class="input-suffix">سم</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">پانی </label>
+                        <div class="input-group">
+                            <input type="number" step="0.1" placeholder="پانی" class="form-input measurement-width" data-index="${newIndex}">
+                            <span class="input-suffix">سم</span>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="form-label">پانی </label>
-                <div class="input-group">
-                    <input type="number" placeholder="پانی" class="form-input measurement-width" data-index="${newIndex}">
-                    <span class="input-suffix">سم</span>
-                </div>
-            </div>
-        </div>
-    `;
+            `;
             
             measurementsContainer.appendChild(measurementDiv);
             
@@ -964,13 +964,13 @@
             
             heightInput.addEventListener('input', function() {
                 const index = parseInt(this.dataset.index);
-                measurements[index].height = parseInt(this.value) || 0;
+                measurements[index].height = parseFloat(this.value) || 0;
                 resetCalculation();
             });
             
             widthInput.addEventListener('input', function() {
                 const index = parseInt(this.dataset.index);
-                measurements[index].width = parseInt(this.value) || 0;
+                measurements[index].width = parseFloat(this.value) || 0;
                 resetCalculation();
             });
             
